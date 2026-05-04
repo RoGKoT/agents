@@ -2,7 +2,7 @@
 name: 🧭 Prompts Hub
 description: Reference agent for prompts redirection and management.
 argument-hint: What do you prompt from me ?
-agents: ["*"]
+agents: [⏱️ Time Management]
 model: Raptor mini (Preview) (copilot)
 tools: [agent]
 ---
