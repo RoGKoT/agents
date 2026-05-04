@@ -29,18 +29,27 @@ description: Branch management and workflow for Git
   Shortcut file that call agents to resolve task
   Agents involved in task resolution.
 
+# [*Conflicts*](#conflicts)
+  Always resolve any conflict prior to proceeding.
+  Always use rebase to keep a clean history and avoid merge commits.
+  git stash push -m "Explicit Label"
+  git switch <branch>
+  git stash pop
+  [backup](#backup)
+
 # [*Create*](#create)
   git switch [<source branch>](#source-branchs-derivation)
   git branch <new branch>
   git switch <branch>
 
 # [*Satisfied Customer*](#satisfied-customer)
-  Always commit/push/stash any modification to current branch prior to working elsewhere.
-  Always check all status before beginning any work. 
-  Always check that source branch is up to date before creating a new branch from it.
-  Always check the active branch before working on it.
-  Always check the active branch before deriving a new branch from it.
+  Always commit/push/stash any modification to current branch prior to work elsewhere.
   Always resolve any conflict prior to proceeding.
+  Prior to do any modification 
+    Always check all status (branchs, remote tracking, etc.). 
+    Always check all status are up to date.
+    Ensure active branch is correct.
+  Ensure right parent branch before deriving a new branch from it.
 
 # [*Backup*](#backup)
   Usually done after work on <branch>.
@@ -48,36 +57,62 @@ description: Branch management and workflow for Git
   git add <files>
   git commit -m "Explicit Comment"
   git push -u origin <branch>
+  always merge in `full`
+  merge in `release`, if required
+  never merge in `main`
 
 # [*Merge*](#merge)
-  source is to merge from
-  target is to merge into
+  # Usual use case
+    ▸ source: agents
+    ▸ target: full, release
+  # Or
+    ▸ source: main
+    ▸ target: agents
+  git fetch origin  
   git switch <source branch>
-  git pull
+    git pull --rebase
+    git push --force-with-lease, if needed
   git switch <target branch>
-  git pull
+    git pull --rebase
+    git push --force-with-lease, if needed
   git merge <source branch>
-  Resolve any conflict if needed
-  git push origin <target branch>
+  - Resolve any conflict if needed
+  git push  origin <target branch>
+
+# [*Rebase*](#rebase)
+  # Only use if
+    ↳ branch is not shared
+    ↳ branch history is not clean
+    ↳ All collaborators are aware of the rebase and its implications
+  # Usual use case
+    ▸ source: main
+    ▸ target: agents
+  git fetch origin  
+  git switch <source branch>
+    git pull --rebase
+    git push --force-with-lease, if needed
+  git switch <target branch>
+    git pull --rebase
+    git push --force-with-lease, if needed
+  git rebase <source branch>
+  git push --force-with-lease origin <target branch>
 
 # [Source Branchs Derivation](#source-branchs-derivation)
   `main` for a new agent
-  `prompts-hub` for a new prompt
   <agent-name> for a new subagent 
 
 # New Agent/Prompt Work Process
   [Create branch for agent/the prompt and make it active](#create)  
 
 # Modification Agent/Prompt Work Process
-  [Check](#satisfied-customer) before starting any modification on an existing branch.
+  [🔎](#satisfied-customer) before starting any modification on an existing branch.
 
 # Workflow
-  Development
-  Tests / Validation
-  [Save your work](#backup)
-  Merge in `full`
-  Merge in `release`
-  Never merge in `main`
+  rebase/merge from `main` when needed
+  development
+  tests/validation
+  [save your work](#backup)
+
 
 # Usefuls commands
   rename branch : git branch -m <old-name> <new-name>
