@@ -25,6 +25,10 @@ description: Branch management and workflow for Git
   Agent files
 ## Subagent Name (subagent-name)
   Agent and subagent files
+## Agent Release Branch (agent-name-release)
+  Production branch for an agent family.
+  Contains only production-ready files for the agent and its subagents.
+  Do not include the root workspace development files.
 
 
 # [*Conflicts*](#conflicts)
@@ -99,6 +103,8 @@ description: Branch management and workflow for Git
   `main` for a new agent
   `<agent-name>` for a new subagent
   For nested subagents, derive from the parent agent branch. Because Git cannot create a branch named `parent/child` when `parent` already exists, use a clear derived name like `time-management-timestamps` and base it on the `time-management` branch.
+  If an agent should act as a local base for its subagents, keep the base branch as the agent branch and use a separate release branch named `<agent-name>-release` for production integration.
+  Example: `main` -> `time-management` -> `time-management-timestamps`, with `time-management-release` as the release branch for production-ready files.
 
 # New Agent/Prompt Work Process
   [Create branch for agent/the prompt and make it active](#create)  
