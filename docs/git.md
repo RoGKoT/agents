@@ -20,6 +20,7 @@ description: Branch management and workflow for Git
 ## Release (release)
   Production's files only
   Mainly .github/agents/ and .github/prompts/ folders
+  Do not merge the root development workspace into release.
 ## Agent Name (agent-name)
   Agent files
 ## Subagent Name (subagent-name)
@@ -55,7 +56,7 @@ description: Branch management and workflow for Git
   git commit -m "Explicit Comment"
   git push -u origin <branch>
   always merge in `full`
-  merge in `release`, if required
+  merge in `release` only the necessary production files, typically `.github/agents/...` and `.github/prompts/...`
   never merge in `main`
 
 # [*Merge*](#merge)
@@ -96,7 +97,8 @@ description: Branch management and workflow for Git
 
 # [Source Branchs Derivation](#source-branchs-derivation)
   `main` for a new agent
-  <agent-name> for a new subagent 
+  `<agent-name>` for a new subagent
+  For nested subagents, derive from the parent agent branch, e.g. `time-management/timestamps`
 
 # New Agent/Prompt Work Process
   [Create branch for agent/the prompt and make it active](#create)  
