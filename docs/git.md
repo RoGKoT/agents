@@ -14,20 +14,17 @@ description: Branch management and workflow for Git
 
 # Branch names and contents
 ## Main (main)
-  Only common files to all branchs
+  Only common and base files to all branchs
 ## Full (full)
   All workspace files
 ## Release (release)
   Production's files only
+  Mainly .github/agents/ and .github/prompts/ folders
 ## Agent Name (agent-name)
   Agent files
 ## Subagent Name (subagent-name)
   Agent and subagent files
-## Prompts Hub (prompts-hub)
-  Base for prompts system (shortcuts)
-## Prompt (prompt)
-  Shortcut file that call agents to resolve task
-  Agents involved in task resolution.
+
 
 # [*Conflicts*](#conflicts)
   Always resolve any conflict prior to proceeding.
