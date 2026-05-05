@@ -1,1 +1,0 @@
-Prompts files to be used as shortcut ex: /Timestamp will generate a timestamp for archiving sessions
