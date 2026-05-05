@@ -14,20 +14,18 @@ description: Branch management and workflow for Git
 
 # Branch names and contents
 ## Main (main)
-  Only common files to all branchs
+  Only common and base files to all branchs
 ## Full (full)
   All workspace files
 ## Release (release)
   Production's files only
+  Mainly .github/agents/ and .github/prompts/ folders
+  Do not merge the root development workspace into release.
 ## Agent Name (agent-name)
   Agent files
 ## Subagent Name (subagent-name)
   Agent and subagent files
-## Prompts Hub (prompts-hub)
-  Base for prompts system (shortcuts)
-## Prompt (prompt)
-  Shortcut file that call agents to resolve task
-  Agents involved in task resolution.
+
 
 # [*Conflicts*](#conflicts)
   Always resolve any conflict prior to proceeding.
@@ -58,7 +56,7 @@ description: Branch management and workflow for Git
   git commit -m "Explicit Comment"
   git push -u origin <branch>
   always merge in `full`
-  merge in `release`, if required
+  merge in `release` only the necessary production files, typically `.github/agents/...` and `.github/prompts/...`
   never merge in `main`
 
 # [*Merge*](#merge)
@@ -99,7 +97,8 @@ description: Branch management and workflow for Git
 
 # [Source Branchs Derivation](#source-branchs-derivation)
   `main` for a new agent
-  <agent-name> for a new subagent 
+  `<agent-name>` for a new subagent
+  For nested subagents, derive from the parent agent branch. Because Git cannot create a branch named `parent/child` when `parent` already exists, use a clear derived name like `time-management-timestamps` and base it on the `time-management` branch.
 
 # New Agent/Prompt Work Process
   [Create branch for agent/the prompt and make it active](#create)  
