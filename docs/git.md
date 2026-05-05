@@ -98,7 +98,7 @@ description: Branch management and workflow for Git
 # [Source Branchs Derivation](#source-branchs-derivation)
   `main` for a new agent
   `<agent-name>` for a new subagent
-  For nested subagents, derive from the parent agent branch, e.g. `time-management/timestamps`
+  For nested subagents, derive from the parent agent branch. Because Git cannot create a branch named `parent/child` when `parent` already exists, use a clear derived name like `time-management-timestamps` and base it on the `time-management` branch.
 
 # New Agent/Prompt Work Process
   [Create branch for agent/the prompt and make it active](#create)  
